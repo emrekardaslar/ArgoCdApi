@@ -16,8 +16,9 @@ WORKDIR /app
 # Copy built application
 COPY --from=build /out .
 
-# Expose port 5000 (instead of 8080)
-EXPOSE 5000
+ENV PORT=5041
+EXPOSE 5041
+
 
 # Run the application on port 5000
 CMD ["dotnet", "ArgoCdApi.dll"]
