@@ -1,0 +1,23 @@
+# Use official .NET 8 SDK to build the app
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /app
+
+# Copy and restore dependencies
+COPY . .
+RUN dotnet restore
+
+# Build the application
+RUN dotnet publish -c Release -o /out
+
+# Use runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
+WORKDIR /app
+
+# Copy built application
+COPY --from=build /out .
+
+# Expose port 5000 (instead of 8080)
+EXPOSE 5000
+
+# Run the application on port 5000
+CMD ["dotnet", "ArgoCdApi.dll"]

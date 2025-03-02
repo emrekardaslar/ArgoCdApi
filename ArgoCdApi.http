@@ -1,0 +1,6 @@
+@ArgoCdApi_HostAddress = http://localhost:5041
+
+GET {{ArgoCdApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
